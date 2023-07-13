@@ -1,4 +1,4 @@
-package com.example.assignment2_spring.model;
+package com.example.assignment2_spring.entity;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.sql.Date;
 @Entity
 @Data
-public class Content {
+public class ContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -1,2 +1,4 @@
-package com.example.assignment2_spring.service;public class ContentService {
+package com.example.assignment2_spring.service;
+
+public interface ContentService {
 }
