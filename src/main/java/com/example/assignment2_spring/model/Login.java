@@ -8,6 +8,6 @@ import javax.validation.constraints.NotBlank;
 public class Login {
     @NotBlank(message = "{username.not-blank}")
     private String username;
-    @NotBlank(message = "Please input your password")
+    @NotBlank(message = "{username.password}")
     private String password;
 }
