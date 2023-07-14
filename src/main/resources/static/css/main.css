@@ -1,0 +1,41 @@
+.dropdown{
+    position: relative;
+}
+.dropdown-menu{
+    position: absolute;
+    top: 100%;
+    display: inline-block;
+    left: -103px;
+    display: none;
+}
+.dropdown-menu::after{
+    top: -10px;
+    left: 75px;
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 55px;
+}
+.dropdown:hover .dropdown-menu{
+    display: block;
+}
+#user-button{
+    left: 200px;
+    padding: auto;
+    margin-right: 0;
+}
+.navbar{
+    padding-top: -10px;
+    height: 45px;
+}
+.row{
+    margin-top: 45px;
+}
+.dropdown-item {
+    padding: 10px;
+    padding-left: 20px;
+}
+.table-light {
+    background-color: rgba(38, 228, 164, .2);
+    color: brown;
+}
