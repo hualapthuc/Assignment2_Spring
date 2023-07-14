@@ -24,7 +24,10 @@ public class ContentEntity implements Serializable{
     @Column(name = "updatedDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
+
     private String sort;
 
-    private String authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private MemberEntity memberEntity;
 }
