@@ -2,12 +2,10 @@ package com.example.assignment2_spring.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 @Entity
+@Table(name = "content")
 @Data
 public class ContentEntity {
     @Id

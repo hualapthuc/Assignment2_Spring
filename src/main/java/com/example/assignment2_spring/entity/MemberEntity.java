@@ -2,12 +2,10 @@ package com.example.assignment2_spring.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "member")
 @Data
 public class MemberEntity {
     @Id
@@ -17,6 +15,7 @@ public class MemberEntity {
     private String password;
     private String firstName;
     private String lastName;
+    private String description;
     private String phone;
     private String email;
 }

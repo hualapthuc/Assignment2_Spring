@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register</title>
 </head>
 <body>
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><b>Register</b></div>
+                <div class="red" id="error" style="color: red">
+                    <%=error %>
+                </div>
+                <div class="card-body">
+                    <form action="${pageContext.request.contextPath}/register" method="post">
 
+                        <div class="form-group row was-validated">
+                            <div class="w-100 mx-3">
+                                <input type="text" id="firstName" class="form-control" name="firstName" placeholder="First Name"   required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row was-validated">
+                            <div class="w-100 mx-3">
+                                <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Last Name"  required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row was-validated">
+                            <div class="w-100 mx-3">
+                                <span id="msgg" class="hidden" style="color: red;display: block; margin-bottom: 10px"></span>
+                                <input type="text" id="phone" class="form-control" name="phone" placeholder="Phone" onkeyup="validatePhone()"  required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row was-validated">
+                            <div class="w-100 mx-3">
+                                <span id="message" class="hidden" style="color: red;display: block; margin-bottom: 10px"></span>
+                                <input type="email" id="email" class="form-control" name="email" onkeyup="validateEmail()" placeholder="email@gmail.com"  required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row was-validated">
+                            <div class="w-100 mx-3">
+                                <input type="text" id="userName" class="form-control" name="userName" placeholder="User name"   required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row ">
+                            <div class="w-100 mx-3">
+                                <input type="password" id="password" class="form-control" name="password"  placeholder="Password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="w-100 mx-3">
+                                <span id="msg" class="" style="color: red;display: block; margin-bottom: 10px"></span>
+                                <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkPassword()"  required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" id="submit" class="btn btn-outline-primary bg-success text-white btn-block rounded w-100 mb-4">
+                                Register
+                            </button>
+                            <a href="<%=url%>/resources/login.jsp">
+                                Click here to Login
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
