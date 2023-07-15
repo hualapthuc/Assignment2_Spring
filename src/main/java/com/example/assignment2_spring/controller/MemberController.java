@@ -6,23 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/register")
-public class RegisterController {
+@RequestMapping("/member")
+public class MemberController {
     @Autowired
     private MemberService memberService;
-    @GetMapping("")
-    public String showRegister(Model model) {
-        model.addAttribute("member",new MemberEntity());
-        return "user/register";
+    @GetMapping("/edit-profile")
+    public String editProfile(Model model) {
+        return "member/edit-profile";
     }
-    @PostMapping("")
-    public String doRegister(@ModelAttribute MemberEntity memberEntity) {
-        memberService.register(memberEntity);
-        return "redirect:/login";
+    @GetMapping("/change-password")
+    public String changPassword(Model model) {
+        return "member/change-password";
+    }
+    @GetMapping("/view-profile")
+    public String viewProfile(Model model) {
+        return "member/view-profile";
     }
 }

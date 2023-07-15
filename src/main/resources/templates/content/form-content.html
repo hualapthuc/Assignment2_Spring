@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en" layout:decorate="~{layout/main}">
 <body>
+<div layout:fragment="content">
+    <div class="row col-sm-10 mt-3">
+        <h1 class="ml-3 mb-3"> Add Content</h1>
+        <div class="card h-100 ml-3 w-100">
+            <div class="card-header">
+                Content Form Elements
+            </div>
+            <form th:action="@{/content/save-content}" method="post" th:object="${contents}" class="form">
+                <div class="card-body">
+                    <div class="row mt-0">
+                        <div class="col-xl-10">
+                            <div class="form-group was-validated">
+                                <label style="font-weight: bolder;">Title</label>
+                                <input type="text" th:field="*{title}" class="form-control" id="title" name="title" placeholder="Enter the title">
+                            </div>
+                        </div>
 
+                        <div class="col-xl-10">
+                            <div class="form-group">
+                                <label style="font-weight: bolder;">Brief</label>
+                                <textarea type="text" th:field="*{brief}" class="form-control" id="brief-textarea" name="brief" required rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-10">
+                            <div class="form-group">
+                                <label style="font-weight: bolder;">Content</label>
+                                <textarea type="text" th:field="*{content}" class="form-control" id="content-textarea" name="content" required rows="7"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-left">
+                                <button type="submit" id="submit" name="submit" class="btn btn-success border">Submit Button</button>
+                                <button type="reset" id="reset" name="reset" class="btn btn-light border">Reset Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
