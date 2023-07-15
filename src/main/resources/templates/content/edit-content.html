@@ -5,22 +5,22 @@
 <body>
 <div layout:fragment="content">
   <div class="container">
-    <form th:action="@{/content/update-content}" method="post" th:object="${contentss}" class="form">
+    <form th:action="@{/content/update-content}" method="post" th:object="${contents}" class="form">
       <div class="form-group">
         <label>Content ID:</label>
-        <input type="text" th:field="*{id}" class="form-control" th:value="${contentss.id}" readonly>
+        <input type="text" th:field="*{id}" class="form-control" th:value="${contents.id}" readonly>
       </div>
       <div class="form-group">
         <label>Title:</label>
-        <input type="text" th:field="*{title}" class="form-control">
+        <input type="text" th:field="*{title}" th:value="${contents.title}" class="form-control">
       </div>
       <div class="form-group">
         <label>Brief:</label>
-        <textarea type="text" th:field="*{brief}" class="form-control"></textarea>
+        <textarea type="text" th:field="*{brief}" th:value="${contents.brief}" class="form-control"></textarea>
       </div>
       <div class="form-group">
         <label>Content:</label>
-        <textarea type="text" th:field="*{content}" class="form-control" rows="7"></textarea>
+        <textarea type="text" th:field="*{content}" th:value="${contents.content}" class="form-control" rows="7"></textarea>
       </div>
       <div class="form-group">
         <a th:href="@{/content}" class="btn btn-light  mt-3" tabindex="-1" role="button" aria-disabled="true">Cancel</a>

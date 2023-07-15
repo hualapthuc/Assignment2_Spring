@@ -29,9 +29,10 @@
                             <thead>
                             <tr class="" style="font-size: 14px;color: black">
                                 <th class="col-1 text-center">#</th>
-                                <th class="col-lg-2" >Title</th>
-                                <th class="col-lg-3">Brief</th>
+                                <th class="col-2" >Title</th>
+                                <th class="col-3">Brief</th>
                                 <th class="col-2">Create Date</th>
+                                <th class="col-2">Update Date</th>
                                 <th class="col-2 text-center">Action</th>
                             </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                 <td  style="word-break: break-word" th:utext="${content.title}"></td>
                                 <td  style="word-break: break-word" th:utext="${content.brief}"></td>
                                 <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
+                                <td   style="word-break: break-word" th:utext="${content.updateDate}"></td>
                                 <td  style="word-break: break-word" class="text-center">
                                     <a th:href="@{/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
                                         <i class="bi bi-pencil-square" style="color: orange"></i>

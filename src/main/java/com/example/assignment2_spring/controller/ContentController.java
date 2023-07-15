@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -32,12 +34,12 @@ public class ContentController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
         ContentEntity content = contentService.getContentById(id);
-        model.addAttribute("contentss", content);
+        model.addAttribute("contents", content);
         return "content/edit-content";
     }
     @PostMapping ("/update-content")
-    public String updateContent(@ModelAttribute("content") ContentEntity content) {
-        contentService.createContent(content);
+    public String updateContent(@ModelAttribute("contents") ContentEntity content) {
+        contentService.editContent(content);
         return "redirect:/content/";
     }
     @GetMapping("/delete/{id}")
