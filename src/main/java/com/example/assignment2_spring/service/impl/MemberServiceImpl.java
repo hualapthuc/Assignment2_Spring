@@ -8,10 +8,17 @@ import com.example.assignment2_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberRepository memberRepository;
+
+    @Override
+    public List<MemberEntity> getAll() {
+        return memberRepository.findAll();
+    }
 
     @Override
     public void register(MemberEntity memberEntity) {
@@ -24,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updateMember(MemberEntity memberEntity) {
+    public void editMember(MemberEntity memberEntity) {
         memberRepository.save(memberEntity);
     }
 

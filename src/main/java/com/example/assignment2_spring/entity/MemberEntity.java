@@ -3,10 +3,12 @@ package com.example.assignment2_spring.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "member")
 @Data
 public class MemberEntity {
     @Id

@@ -2,6 +2,7 @@ package com.example.assignment2_spring.controller;
 
 import com.example.assignment2_spring.entity.MemberEntity;
 import com.example.assignment2_spring.model.Login;
+import com.example.assignment2_spring.service.ContentService;
 import com.example.assignment2_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,12 @@ import javax.validation.Valid;
 public class LoginController {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private ContentService contentService;
     @GetMapping("")
     public String showLogin(Model model) {
         model.addAttribute("login", new Login());
+        model.addAttribute("listContent",contentService.getAllContent());
         return "user/login";
     }
     @PostMapping("")

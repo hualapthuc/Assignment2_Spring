@@ -1,11 +1,14 @@
 package com.example.assignment2_spring.service;
 
 import com.example.assignment2_spring.entity.ContentEntity;
-import com.example.assignment2_spring.entity.MemberEntity;
+
+import java.util.List;
 
 public interface ContentService {
-    public void addContent(ContentEntity contentEntity);
-    public void deleteContent(int id);
-    public void updateContent(ContentEntity contentEntity);
-    public ContentEntity getContentById(int id);
+    List<ContentEntity> getAllContent();
+    void createContent(ContentEntity content);
+    void deleteContent(int id);
+    void editContent(ContentEntity content);
+    ContentEntity getContentById(int id);
+    List<ContentEntity> getByTitle(String title);
 }

@@ -71,7 +71,7 @@
         <a class="navbar-brand pl-2" href="#">CMS</a>
         <div class="p-0">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-dark mr-1" data-toggle="modal" data-target="#exampleModal">
                 Login
             </button>
         </div>
@@ -86,32 +86,58 @@
             </form>
         </nav>
         <div class="content">
-            <a href="/content/view-content" class="bg-light w-100 p-2 d-block border"><i class="fas fa-table"></i> View contents</a>
-            <a href="/content/form-content" class="bg-light w-100 p-2 d-block border"><i class="fas fa-edit"></i> Form content</a>
+            <a href="/login" class="bg-light w-100 p-2 d-block border">
+                <button type="button" class="btn w-100">
+                    <i class="fas fa-table"></i> View contents
+                </button>
+            </a>
+            <a class="bg-light w-100 p-2 d-block border">
+                <button onclick="alert('Please Login....')" type="button" class="btn w-100" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fas fa-edit"></i> Form content
+                </button>
+            </a>
         </div>
     </div>
     <div class="col-sm-9">
         <h1 class="m-3"> View Content</h1>
         <div class="card h-100 ml-3 w-100">
-            <div class="card-header">
-                View Content List
+            <div class="card-header container-fluid d-flex" style="padding: 12px 12px 0 12px">
+                <div class="mr-auto p-2">
+                    View Content List
+                </div>
+                <div class="ml-auto p-2">
+                    <form th:action="@{/content/search}" class="mb-3 form-inline" method="post">
+                        <div class="input-group">
+                            <input type="search" class="form-control rounded btn-sm" placeholder="Search By Title" aria-label="Search" aria-describedby="basic-addon1" name="search"/>
+                        </div>
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-primary btn-sm ml-1">Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-body container text-center" >
-                <table class="table table-bordered align-items-center">
-                    <thead>
-                    <tr class="" style="font-size: 18px; text-align: center;">
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Brief</th>
-                        <th>Content</th>
-                        <th>Create Date</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
+            <div class="card-body container">
+                <div class="row mt-0">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr class="" style="font-size: 14px;color: black">
+                            <th class="col-1 text-center">#</th>
+                            <th class="col-2" >Title</th>
+                            <th class="col-3">Brief</th>
+                            <th class="col-2">Create Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="content:${listContent}">
+                            <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
+                            <td  style="word-break: break-word" th:utext="${content.title}"></td>
+                            <td  style="word-break: break-word" th:utext="${content.brief}"></td>
+                            <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -3,8 +3,9 @@ package com.example.assignment2_spring.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 @Entity
+@Table(name = "content")
 @Data
 public class ContentEntity {
     @Id
@@ -16,11 +17,13 @@ public class ContentEntity {
     private String brief;
     @Column(name = "content", nullable = false, length = 200)
     private String content;
-    @Column(name = "createDate", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "createdDate", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
     @Column(name = "updatedDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
-    @Column(name = "sort", nullable = false, length = 200)
+
     private String sort;
     @ManyToOne
     @JoinColumn(name = "authorId")

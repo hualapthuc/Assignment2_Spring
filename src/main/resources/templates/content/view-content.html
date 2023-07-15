@@ -4,46 +4,58 @@
       lang="en" layout:decorate="~{layout/main}">
 <body>
 <div layout:fragment="content">
-    <form action="${pageContext.request.contextPath}/formcontent" method="post">
-        <div class="row col-sm-10 mt-3">
-            <h1 class="ml-3 mb-3"> Add Content</h1>
-            <div class="card h-100 ml-3 w-100">
-                <div class="card-header">
-                    Content Form Elements
-                </div>
-                <div class="card-body">
-                    <div class="row mt-0">
-                        <div class="col-xl-10">
-                            <div class="form-group was-validated">
-                                <label style="font-weight: bolder;">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title">
-                            </div>
-                        </div>
-
-                        <div class="col-xl-10">
-                            <div class="form-group">
-                                <label style="font-weight: bolder;">Brief</label>
-                                <textarea type="text" class="form-control" id="brief-textarea" name="brief" required rows="3"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-10">
-                            <div class="form-group">
-                                <label style="font-weight: bolder;">Content</label>
-                                <textarea type="text" class="form-control" id="content-textarea" name="content" required rows="7"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="text-left">
-                                <button type="submit" id="submit" name="submit" class="btn btn-light border">Submit Button</button>
-                                <button type="reset" id="reset" name="reset" class="btn btn-light border">Reset Button</button>
-                            </div>
-                        </div>
+    <h1 class="m-3"> View Content</h1>
+    <div class="card h-100 ml-3 w-100">
+        <div class="card-header container-fluid d-flex" style="padding: 12px 12px 0 12px">
+            <div class="mr-auto p-2">
+                View Content List
+            </div>
+            <div class="ml-auto p-2">
+                <form th:action="@{/content/search}" class="mb-3 form-inline" method="post">
+                    <div class="input-group">
+                        <input type="search" class="form-control rounded btn-sm" placeholder="Search By Title" aria-label="Search" aria-describedby="basic-addon1" name="search"/>
                     </div>
-                </div>
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary btn-sm ml-1">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
+
+        <div class="card-body container">
+            <div class="row mt-0">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="" style="font-size: 14px;color: black">
+                        <th class="col-1 text-center">#</th>
+                        <th class="col-2" >Title</th>
+                        <th class="col-3">Brief</th>
+                        <th class="col-2">Create Date</th>
+                        <th class="col-2">Update Date</th>
+                        <th class="col-2 text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="content:${listContent}">
+                        <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
+                        <td  style="word-break: break-word" th:utext="${content.title}"></td>
+                        <td  style="word-break: break-word" th:utext="${content.brief}"></td>
+                        <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
+                        <td   style="word-break: break-word" th:utext="${content.updateDate}"></td>
+                        <td  style="word-break: break-word" class="text-center">
+                            <a th:href="@{/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                                <i class="fas fa-edit" style="color: blue"></i>
+                            </a>
+                            <a th:href="@{/content/delete/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" onclick="deleteContennt()">
+                                <i class="fas fa-trash-alt" style="color: red"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
