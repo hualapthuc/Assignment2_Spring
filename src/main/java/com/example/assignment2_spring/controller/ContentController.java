@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ContentController {
     @GetMapping("")
     public String showContent() {
-        return "user/login";
+        return "content/form-content";
     }
 }

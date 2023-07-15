@@ -1,6 +1,8 @@
 package com.example.assignment2_spring.service.impl;
 
 import com.example.assignment2_spring.entity.MemberEntity;
+import com.example.assignment2_spring.model.Login;
+import com.example.assignment2_spring.model.Register;
 import com.example.assignment2_spring.repository.MemberRepository;
 import com.example.assignment2_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
 
     @Override
-    public void addMember(MemberEntity memberEntity) {
+    public void register(MemberEntity memberEntity) {
         memberRepository.save(memberEntity);
     }
 
@@ -29,5 +31,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberEntity getMemberById(int id) {
         return memberRepository.getById(id);
+    }
+
+    @Override
+    public MemberEntity login(Login login) {
+        return memberRepository.findMemberEntitiesByUserNameAndPassword(login.getUsername(), login.getPassword());
     }
 }

@@ -20,7 +20,7 @@ public class MemberEntity {
     private String firstName;
     @Column(name = "lastname", nullable = false, length = 20)
     private String lastName;
-    @Column(name = "description", nullable = false, length = 200)
+    @Column(name = "description", length = 200)
     private String description;
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
