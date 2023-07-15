@@ -42,11 +42,11 @@
                                 <td  style="word-break: break-word" th:utext="${content.brief}"></td>
                                 <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
                                 <td  style="word-break: break-word" class="text-center">
-                                    <a th:href="@{/content/edit/{id}(id=${content.id})}" class="btn " tabindex="-1" role="button" aria-disabled="true" >
-                                        <i class="bi bi-pencil" style="color: orange;font-size: 16px"></i>
+                                    <a th:href="@{/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                                        <i class="bi bi-pencil-square" style="color: orange"></i>
                                     </a>
-                                    <a th:href="@{/content/delete/{id}(id=${content.id})}" class="btn btn-sm" tabindex="-1" role="button" aria-disabled="true" >
-                                        <i class="bi bi-trash3-fill" style="color: red;font-size: 16px"></i>
+                                    <a th:href="@{/content/delete/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                                        <i class="bi bi-trash3-fill" style="color: red" onclick="deleteContennt()"></i>
                                     </a>
                                 </td>
                             </tr>

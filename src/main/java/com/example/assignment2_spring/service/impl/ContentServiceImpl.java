@@ -33,11 +33,13 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public ContentEntity getContentById(int id) {
-        return contentRepository.findById(id).orElseThrow(() -> new RuntimeException("content not found"));
+        return contentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("content not found"));
     }
 
     @Override
     public List<ContentEntity> getByTitle(String title) {
         return contentRepository.findByTitle(title);
     }
+
 }

@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.AbstractDocument;
+import java.util.List;
 
 @Controller
 @RequestMapping("/content")
@@ -27,17 +26,17 @@ public class ContentController {
     }
     @PostMapping("/save-content")
     public  String savePContent(@ModelAttribute ContentEntity content, BindingResult bindingResult, Model model) {
-        contentService.createContent(content);
+        contentService.editContent(content);
         return "redirect:/content";
     }
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") int id, Model model) {
+    public String showEditForm(@PathVariable("id") Integer id, Model model) {
         ContentEntity content = contentService.getContentById(id);
-        model.addAttribute("contents", content);
+        model.addAttribute("contentss", content);
         return "content/edit-content";
     }
     @PostMapping ("/update-content")
-    public String updateContent(@ModelAttribute("content") ContentEntity content, BindingResult result, Model model) {
+    public String updateContent(@ModelAttribute("content") ContentEntity content) {
         contentService.createContent(content);
         return "redirect:/content/";
     }
@@ -48,7 +47,12 @@ public class ContentController {
     }
     @PostMapping("/search")
     public String search(@RequestParam("search") String search, Model model) {
-        model.addAttribute("titleContent", contentService.getByTitle(search));
+        if(search != null) {
+            model.addAttribute("titleContent", contentService.getByTitle(search));
+        }else  {
+            List<ContentEntity> list = contentService.getAllContent();
+            model.addAttribute("list", list);
+        }
         return "content/view-content";
     }
 }

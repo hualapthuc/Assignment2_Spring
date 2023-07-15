@@ -5,10 +5,10 @@
 <body>
 <div layout:fragment="content">
   <div class="container">
-    <form th:action="@{/content/update-content}" method="post" th:object="${contents}" class="form">
+    <form th:action="@{/content/update-content}" method="post" th:object="${contentss}" class="form">
       <div class="form-group">
         <label>Content ID:</label>
-        <input type="text" th:field="*{id}" class="form-control" th:value="${contents.id}" readonly>
+        <input type="text" th:field="*{id}" class="form-control" th:value="${contentss.id}" readonly>
       </div>
       <div class="form-group">
         <label>Title:</label>

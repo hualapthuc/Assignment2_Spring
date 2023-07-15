@@ -9,12 +9,12 @@ import java.util.Date;
 public class ContentEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "title", nullable = false, length = 500)
+    private Integer id;
+    @Column(name = "title", nullable = false, length = 200)
     private String title;
-    @Column(name = "brief", nullable = false, length = 500)
+    @Column(name = "brief", nullable = false, length = 200)
     private String brief;
-    @Column(name = "content", nullable = false, length = 5000)
+    @Column(name = "content", nullable = false, length = 200)
     private String content;
 
     @Column(name = "createdDate", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -28,6 +28,6 @@ public class ContentEntity implements Serializable{
     private String sort;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "authorId")
     private MemberEntity memberEntity;
 }

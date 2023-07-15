@@ -39,3 +39,10 @@
     background-color: rgba(38, 228, 164, .2);
     color: brown;
 }
+i {
+    font-size: 16px;
+     transition:font-size .5s, transform 1s;
+}
+i:hover {
+    font-size: 20px;
+}
