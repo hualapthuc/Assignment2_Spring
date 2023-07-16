@@ -11,6 +11,8 @@ public class Register implements Serializable {
     private String userName;
     @NotBlank(message = "Please input your password")
     private String password;
+    @NotBlank(message = "Please input your re-password")
+    private String rePassword;
     @NotBlank(message = "Please input your firstName")
     private String firstName;
     @NotBlank(message = "Please input your lastName")

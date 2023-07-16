@@ -4,6 +4,7 @@
       lang="en" layout:decorate="~{layout/main}">
 <body>
 <div layout:fragment="content">
+    <h5 class="text-center mt-3">WELCOME, <span th:utext="${member.userName}" class="text-danger"></span></h5>
     <h1 class="m-3"> View Content</h1>
     <div class="card h-100 ml-3 w-100">
         <div class="card-header container-fluid d-flex" style="padding: 12px 12px 0 12px">
@@ -11,7 +12,7 @@
                 View Content List
             </div>
             <div class="ml-auto p-2">
-                <form th:action="@{/content/search}" class="mb-3 form-inline" method="post">
+                <form th:action="@{/login/search}" class="mb-2 form-inline" method="post">
                     <div class="input-group">
                         <input type="search" class="form-control rounded btn-sm" placeholder="Search By Title" aria-label="Search" aria-describedby="basic-addon1" name="search"/>
                     </div>
@@ -28,7 +29,7 @@
                     <thead>
                     <tr class="" style="font-size: 14px;color: black">
                         <th class="col-1 text-center">#</th>
-                        <th class="col-2" >Title</th>
+                        <th class="col-2">Title</th>
                         <th class="col-3">Brief</th>
                         <th class="col-2">Create Date</th>
                         <th class="col-2">Update Date</th>
@@ -36,17 +37,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="content:${listContent}">
+                    <tr th:each="content:${member.contentEntityList}">
                         <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
                         <td  style="word-break: break-word" th:utext="${content.title}"></td>
                         <td  style="word-break: break-word" th:utext="${content.brief}"></td>
                         <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
                         <td   style="word-break: break-word" th:utext="${content.updateDate}"></td>
                         <td  style="word-break: break-word" class="text-center">
-                            <a th:href="@{/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                            <a th:href="@{/login/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
                                 <i class="fas fa-edit" style="color: blue"></i>
                             </a>
-                            <a th:href="@{/content/delete/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" onclick="deleteContennt()">
+                            <a th:href="@{/login/content/delete/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" onclick="deleteContennt()">
                                 <i class="fas fa-trash-alt" style="color: red"></i>
                             </a>
                         </td>

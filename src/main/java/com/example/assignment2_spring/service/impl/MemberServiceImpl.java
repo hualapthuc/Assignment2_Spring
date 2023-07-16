@@ -40,8 +40,9 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.getById(id);
     }
 
+
     @Override
     public MemberEntity login(Login login) {
-        return memberRepository.findMemberEntitiesByUserNameAndPassword(login.getUsername(), login.getPassword());
+        return memberRepository.findMemberEntityByUserNameAndPassword(login.getUsername(), login.getPassword());
     }
 }

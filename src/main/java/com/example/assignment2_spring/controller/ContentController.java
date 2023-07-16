@@ -5,7 +5,6 @@ import com.example.assignment2_spring.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ContentController {
         return "content/form-content";
     }
     @PostMapping("/save-content")
-    public  String savePContent(@ModelAttribute ContentEntity content, BindingResult bindingResult, Model model) {
+    public  String savePContent(@ModelAttribute ContentEntity content) {
         contentService.editContent(content);
         return "redirect:/content";
     }

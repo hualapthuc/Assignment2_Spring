@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-    @Autowired
-    private MemberService memberService;
-    @GetMapping("/edit-profile")
-    public String editProfile(Model model) {
-        return "member/edit-profile";
-    }
-    @GetMapping("/change-password")
-    public String changPassword(Model model) {
-        return "member/change-password";
-    }
-    @GetMapping("/view-profile")
-    public String viewProfile(Model model) {
-        return "member/view-profile";
-    }
+//    @Autowired
+//    private MemberService memberService;
+//    @GetMapping("/edit-profile")
+//    public String editProfile(Model model) {
+//        return "member/edit-profile";
+//    }
+//    @GetMapping("/change-password")
+//    public String changPassword(Model model) {
+//        return "member/change-password";
+//    }
+//    @GetMapping("/view-profile")
+//    public String viewProfile(Model model) {
+//        return "member/view-profile";
+//    }
 }

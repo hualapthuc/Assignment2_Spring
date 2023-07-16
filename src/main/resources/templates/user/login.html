@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="">
-                        <button type="submit" class="btn btn-outline-primary bg-success text-white btn-block rounded w-100 mb-4">
+                        <button onclick="alert('Login Successfully!!')" type="submit" class="btn btn-outline-primary bg-success text-white btn-block rounded w-100 mb-4">
                             Login
                         </button>
                         <a href="/register">
@@ -79,12 +79,12 @@
 </header>
 <div class="row">
     <div class="col-sm-2 bg-light pr-0">
-        <nav class="navbar navbar-light bg-light pr-2 py-2 mb-2">
-            <form class="form-inline">
-                <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-light border d-inline" type="submit"><i class="fas fa-search"></i></button>
-            </form>
-        </nav>
+<!--        <nav class="navbar navbar-light bg-light pr-2 py-2 mb-2">-->
+<!--            <form class="form-inline">-->
+<!--                <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-light border d-inline" type="submit"><i class="fas fa-search"></i></button>-->
+<!--            </form>-->
+<!--        </nav>-->
         <div class="content">
             <a href="/login" class="bg-light w-100 p-2 d-block border">
                 <button type="button" class="btn w-100">
@@ -124,7 +124,8 @@
                         <tr class="" style="font-size: 14px;color: black">
                             <th class="col-1 text-center">#</th>
                             <th class="col-2" >Title</th>
-                            <th class="col-3">Brief</th>
+                            <th class="col-2">Brief</th>
+                            <th class="col-1">Author</th>
                             <th class="col-2">Create Date</th>
                         </tr>
                         </thead>
@@ -133,6 +134,7 @@
                             <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
                             <td  style="word-break: break-word" th:utext="${content.title}"></td>
                             <td  style="word-break: break-word" th:utext="${content.brief}"></td>
+                            <td  style="word-break: break-word" th:utext="${content.memberEntity.userName}"></td>
                             <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
                         </tr>
                         </tbody>
