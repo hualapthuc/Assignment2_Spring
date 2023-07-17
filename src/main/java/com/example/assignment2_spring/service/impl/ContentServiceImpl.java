@@ -43,4 +43,13 @@ public class ContentServiceImpl implements ContentService {
     public List<ContentEntity> getByTitle(String title) {
         return contentRepository.findByTitle(title);
     }
+    @Override
+    public List<ContentEntity> getByKeyword(String keyword) {
+        return contentRepository.findByKeyword(keyword);
+    }
+
+    @Override
+    public List<ContentEntity> getByUsername(String username) {
+        return contentRepository.findByMemberUsername(username);
+    }
 }

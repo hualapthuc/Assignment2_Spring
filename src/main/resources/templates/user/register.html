@@ -29,50 +29,76 @@
             <div class="card">
                 <div class="card-header"><b>Register</b></div>
                 <div class="card-body">
-                    <form th:action="@{/register}" th:object="${member}" method="post">
-
-                        <div class="form-group row was-validated">
+                    <form th:action="@{/register}" th:object="${register}" method="post">
+                        <div class="form-group row">
+                            <div th:if="error != null" th:text="${error}" th:attr="class=${error != null ? 'w-100 m-3 text-danger text-center' : ''}">
+                                <div class="w-100 m-3 text-danger text-center"></div>
+                            </div>
                             <div class="w-100 mx-3">
-                                <input type="text" th:field="*{firstName}" id="firstName" class="form-control" name="firstName" placeholder="First Name"   required>
+                                <input type="text" th:field="*{firstName}" id="firstName" class="form-control" name="firstName" placeholder="First Name">
+                            </div>
+                            <div class="w-100 mx-3 text-warning"
+                                 th:if="${#fields.hasErrors('firstName')}"
+                                 th:errors="*{firstName}">
                             </div>
                         </div>
 
-                        <div class="form-group row was-validated">
+                        <div class="form-group row">
                             <div class="w-100 mx-3">
-                                <input type="text" th:field="*{lastName}" id="lastName" class="form-control" name="lastName" placeholder="Last Name"  required>
+                                <input type="text" th:field="*{lastName}" id="lastName" class="form-control" name="lastName" placeholder="Last Name">
+                            </div>
+                            <div class="w-100 mx-3 text-warning"
+                                 th:if="${#fields.hasErrors('lastName')}"
+                                 th:errors="*{lastName}">
                             </div>
                         </div>
 
-                        <div class="form-group row was-validated">
+                        <div class="form-group row">
                             <div class="w-100 mx-3">
                                 <span id="msgg" class="hidden" style="color: red;display: block; margin-bottom: 10px"></span>
-                                <input type="text" th:field="*{phone}" id="phone" class="form-control" name="phone" placeholder="Phone" onkeyup="validatePhone()"  required>
+                                <input type="text" th:field="*{phone}" id="phone" class="form-control" name="phone" placeholder="Phone" onkeyup="validatePhone()">
+                            </div>
+                            <div class="w-100 mx-3 text-warning"
+                                 th:if="${#fields.hasErrors('phone')}"
+                                 th:errors="*{phone}">
                             </div>
                         </div>
 
-                        <div class="form-group row was-validated">
+                        <div class="form-group row">
                             <div class="w-100 mx-3">
                                 <span id="message" class="hidden" style="color: red;display: block; margin-bottom: 10px"></span>
-                                <input type="email" th:field="*{email}" id="email" class="form-control" name="email" onkeyup="validateEmail()" placeholder="email@gmail.com"  required>
+                                <input type="email" th:field="*{email}" id="email" class="form-control" name="email" onkeyup="validateEmail()" placeholder="email@gmail.com">
+                            </div>
+                            <div class="w-100 mx-3 text-warning"
+                                 th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}">
                             </div>
                         </div>
 
-                        <div class="form-group row was-validated">
+                        <div class="form-group row">
                             <div class="w-100 mx-3">
-                                <input type="text" th:field="*{userName}" id="userName" class="form-control" name="userName" placeholder="User name"   required>
+                                <input type="text" th:field="*{username}" id="username" class="form-control" name="username" placeholder="Username">
+                            </div>
+                            <div class="w-100 mx-3 text-warning"
+                                 th:if="${#fields.hasErrors('username')}"
+                                 th:errors="*{username}">
                             </div>
                         </div>
 
                         <div class="form-group row ">
                             <div class="w-100 mx-3">
-                                <input type="password" th:field="*{password}" id="password" class="form-control" name="password"  placeholder="Password" required>
+                                <input type="password" th:field="*{password}" id="password" class="form-control" name="password"  placeholder="Password">
+                            </div>
+                            <div class="w-100 mx-3 text-warning"
+                                 th:if="${#fields.hasErrors('password')}"
+                                 th:errors="*{password}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="w-100 mx-3">
                                 <span id="msg" class="" style="color: red;display: block; margin-bottom: 10px"></span>
-                                <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkPassword()"  required>
+                                <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkPassword()">
                             </div>
                         </div>
 
@@ -96,7 +122,7 @@
         passsword = document.getElementById("password").value;
         confirmPassword = document.getElementById("confirmPassword").value;
         if(passsword!=confirmPassword){
-            document.getElementById("msg").innerHTML = " Password incorrect.";
+            document.getElementById("msg").innerHTML = " Password and Re-password don't match.";
             return false;
         }else{
             document.getElementById("msg").innerHTML = "";

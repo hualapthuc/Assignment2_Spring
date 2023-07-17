@@ -11,4 +11,6 @@ public interface ContentService {
     void editContent(ContentEntity content);
     ContentEntity getContentById(int id);
     List<ContentEntity> getByTitle(String title);
+    List<ContentEntity> getByKeyword(String keyword);
+    List<ContentEntity> getByUsername(String username);
 }

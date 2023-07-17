@@ -30,25 +30,26 @@ public class LoginController {
     public String showLogin(Model model) {
         model.addAttribute("login", new Login());
         model.addAttribute("listContent",contentService.getAllContent());
-        return "user/login";
+        return "/user/login";
     }
     @PostMapping("")
-    public String doLogin(@Valid Login login, BindingResult br, Model model, @ModelAttribute("member") MemberEntity memberEntity) {
+    public String doLogin(@Valid Login login, BindingResult br, Model model) {
         if(br.hasErrors()) {
             return "user/login";
         }
 
-        MemberEntity memberEntity1 = memberService.login(login);
-        if(memberEntity1 == null) {
-            model.addAttribute("error", "Incorrect Username & Password");
+        MemberEntity memberEntity = memberService.login(login);
+        if(memberEntity == null) {
+            model.addAttribute("error", "Incorrect Username or Password");
             return "user/login";
         }
-        model.addAttribute("member", memberEntity1);
+        model.addAttribute("member", memberEntity);
         return "redirect:/login/view-content";
     }
     @GetMapping("/view-content")
-    public  String contentList(Model model) {
+    public  String contentList(Model model, @ModelAttribute("member") MemberEntity member) {
         model.addAttribute("listContent",contentService.getAllContent());
+        model.addAttribute("listContent1",contentService.getByUsername(member.getUserName()));
         model.getAttribute("member");
         return "content/view-content";
     }
@@ -80,33 +81,40 @@ public class LoginController {
         contentService.deleteContent(id);
         return "redirect:/login/view-content";
     }
-    @PostMapping("/search")
-    public String search(@RequestParam("search") String search, Model model) {
-        if(search != null) {
-            model.addAttribute("titleContent", contentService.getByTitle(search));
-        }else  {
-            List<ContentEntity> list = contentService.getAllContent();
-            model.addAttribute("list", list);
-        }
+    @GetMapping("/search")
+    public String SearchContentEntity(@ModelAttribute("member") MemberEntity member, Model model, String keyword) {
+        if(keyword!=null) {
+            List<ContentEntity> list = contentService.getByKeyword(keyword);
+            model.addAttribute("listContent1", list);
+        }else {
+            List<ContentEntity> list = contentService.getByUsername(member.getUserName());
+            model.addAttribute("listContent1", list);}
         return "content/view-content";
     }
     @GetMapping("/member/edit-profile")
-    public String editProfile(Model model) {
-        model.getAttribute("member");
+    public String editProfile(Model model, @ModelAttribute("member") MemberEntity member) {
+        model.addAttribute("member1", memberService.getMemberById(member.getId()));
         return "member/edit-profile";
     }
     @PostMapping("/member/save")
     public String save(@ModelAttribute MemberEntity member) {
         memberService.editMember(member);
-        return "redirect:/login";
+        return "redirect:/login/member/view-profile";
     }
     @GetMapping("/member/change-password")
     public String changPassword(Model model) {
         return "member/change-password";
     }
+    @PostMapping("/member/updatePassword")
+    public String updatePassword(@RequestParam("newPassword") String newPassword,
+                                 @RequestParam("id") int id) {
+        memberService.updatePassword(newPassword, id);
+        return "redirect:/login";
+    }
     @GetMapping("/member/view-profile")
-    public String viewProfile(Model model) {
-        model.getAttribute("member");
+    public String viewProfile(Model model, @ModelAttribute("member") MemberEntity member) {
+        model.addAttribute("member1", memberService.getMemberById(member.getId()));
         return "member/view-profile";
     }
+
 }

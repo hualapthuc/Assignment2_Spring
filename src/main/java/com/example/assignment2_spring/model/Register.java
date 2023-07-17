@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 public class Register implements Serializable {
     @NotBlank(message = "Please input your username")
-    private String userName;
+    private String username;
     @NotBlank(message = "Please input your password")
     private String password;
     @NotBlank(message = "Please input your re-password")

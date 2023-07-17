@@ -12,12 +12,13 @@
                 View Content List
             </div>
             <div class="ml-auto p-2">
-                <form th:action="@{/login/search}" class="mb-2 form-inline" method="post">
+                <form th:action="@{/login/search}" class="mb-2 form-inline" method="get">
                     <div class="input-group">
-                        <input type="search" class="form-control rounded btn-sm" placeholder="Search By Title" aria-label="Search" aria-describedby="basic-addon1" name="search"/>
+                        <input type="text" name="keyword" th:value="${keyword}" class="form-control  rounded btn-sm"  placeholder="Search by Title" size="40">
                     </div>
                     <div class="input-group">
-                        <button type="submit" class="btn btn-primary btn-sm ml-1">Search</button>
+                        <button type="submit" class="btn btn-info btn-sm ml-1">Search</button>
+                        <button type="reset" class="btn btn-warning btn-sm ml-1">Reset</button>
                     </div>
                 </form>
             </div>
@@ -30,17 +31,19 @@
                     <tr class="" style="font-size: 14px;color: black">
                         <th class="col-1 text-center">#</th>
                         <th class="col-2">Title</th>
-                        <th class="col-3">Brief</th>
-                        <th class="col-2">Create Date</th>
-                        <th class="col-2">Update Date</th>
+                        <th class="col-2">Brief</th>
+                        <th class="col-2">Author</th>
+                        <th class="col-1.5">Create Date</th>
+                        <th class="col-1.5">Update Date</th>
                         <th class="col-2 text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="content:${member.contentEntityList}">
+                    <tr th:each="content:${listContent1}">
                         <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
                         <td  style="word-break: break-word" th:utext="${content.title}"></td>
                         <td  style="word-break: break-word" th:utext="${content.brief}"></td>
+                        <td  style="word-break: break-word" th:utext="${content.memberEntity.userName}"></td>
                         <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
                         <td   style="word-break: break-word" th:utext="${content.updateDate}"></td>
                         <td  style="word-break: break-word" class="text-center">

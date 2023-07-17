@@ -7,6 +7,9 @@
     <div class="container">
         <h5 class="text-center mt-3">WELCOME, <span th:utext="${member.userName}" class="text-danger"></span></h5>
         <form th:action="@{/login/update-content}" method="post" th:object="${contents}" class="form">
+            <select th:field="*{memberEntity.id}" style="display: none">
+                <option th:value="${member.id}" th:text="${member.userName}"></option>
+            </select>
             <div class="form-group">
                 <label>Content ID:</label>
                 <input type="text" th:field="*{id}" class="form-control" th:value="${contents.id}" readonly>
