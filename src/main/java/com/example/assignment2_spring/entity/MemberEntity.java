@@ -3,10 +3,12 @@ package com.example.assignment2_spring.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "member")
 @Data
 public class MemberEntity {
     @Id
@@ -30,6 +32,9 @@ public class MemberEntity {
     private Date createDate;
     @Column(name = "updatedDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updateDate;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "memberEntity")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<ContentEntity> contentEntityList;
+
+
+
 }

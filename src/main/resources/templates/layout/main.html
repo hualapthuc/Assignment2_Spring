@@ -31,10 +31,10 @@
 
                 <ul class="dropdown-menu p-0">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li><a class="dropdown-item" href=""><i class="fas fa-user" style="margin-right: 4px"></i> Edit profile</a></li>
-                        <li><a class="dropdown-item" href=""><i class="fas fa-lock" style="margin-right: 4px"></i> Change password</a></li>
-                        <li><a class="dropdown-item" href=""><i class="fas fa-user-secret" style="margin-right: 4px"></i> Info User</a></li>
-                        <li><a class="dropdown-item" href=""><i class="fas fa-sign-out-alt" style="margin-right: 4px"></i> Logout</a></li>
+                        <li><a class="dropdown-item" href="/login/member/edit-profile"><i class="fas fa-user" style="margin-right: 4px"></i> Edit profile</a></li>
+                        <li><a class="dropdown-item" href="/login/member/change-password"><i class="fas fa-lock" style="margin-right: 4px"></i> Change password</a></li>
+                        <li><a class="dropdown-item" href="/login/member/view-profile"><i class="fas fa-user-secret" style="margin-right: 4px"></i> Information</a></li>
+                        <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-out-alt" style="margin-right: 4px"></i> Logout</a></li>
                     </ul>
                 </ul>
             </div>
@@ -44,23 +44,25 @@
 
 <div class="row">
     <div class="col-sm-2 bg-light pr-0">
-        <nav class="navbar navbar-light bg-light pr-2 py-2 mb-2">
-            <form class="form-inline">
-                <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-light border d-inline" type="submit"><i class="fas fa-search"></i></button>
-            </form>
-        </nav>
         <div class="content">
-            <a href="/content/view-content" class="bg-light w-100 p-2 d-block border"><i class="fas fa-table"></i> View contents</a>
-            <a href="/content/form-content" class="bg-light w-100 p-2 d-block border"><i class="fas fa-edit"></i> Form content</a>
+            <a href="/login/view-content" class="bg-light w-100 p-2 d-block border">
+                <button type="button" class="btn w-100">
+                    <i class="fas fa-table"></i> View contents
+                </button>
+            </a>
+            <a href="/login/form-content" class="bg-light w-100 p-2 d-block border">
+                <button type="button" class="btn w-100">
+                    <i class="fas fa-edit"></i> Form content
+                </button>
+            </a>
         </div>
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-9">
         <main id="content" layout:fragment="content">
             MAIN
         </main>
     </div>
 </div>
-<script src="/javascript/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>
