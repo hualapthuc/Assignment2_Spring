@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Data
 public class Register implements Serializable {
-    @NotBlank(message = "Please input your username")
+    @NotBlank(message = "{username.not-blank}")
     private String username;
 
     @PasswordConstraint
@@ -19,10 +19,10 @@ public class Register implements Serializable {
 
     private String rePassword;
 
-    @NotBlank(message = "Please input your firstName")
+    @NotBlank(message = "{firstName.not-blank}")
     private String firstName;
 
-    @NotBlank(message = "Please input your lastName")
+    @NotBlank(message = "{lastName.not-blank}")
     private String lastName;
 
     @PhoneConstraint

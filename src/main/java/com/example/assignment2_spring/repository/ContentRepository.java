@@ -2,6 +2,8 @@ package com.example.assignment2_spring.repository;
 
 import com.example.assignment2_spring.entity.ContentEntity;
 import com.example.assignment2_spring.entity.MemberEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +19,6 @@ public interface ContentRepository extends JpaRepository<ContentEntity, Integer>
     List<ContentEntity> findByMemberUsername(String username);
 
     List<ContentEntity> findContentEntitiesByMemberEntity(MemberEntity memberEntity);
+    Page<ContentEntity> findAll(Pageable pageable);
+    Page<ContentEntity> findByMemberEntity(MemberEntity member, Pageable pageable);
 }

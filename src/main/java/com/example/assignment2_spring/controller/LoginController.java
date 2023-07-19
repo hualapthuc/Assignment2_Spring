@@ -7,7 +7,10 @@ import com.example.assignment2_spring.service.ContentService;
 import com.example.assignment2_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -30,7 +34,29 @@ public class LoginController {
         return new MemberEntity();
     }
     @GetMapping("")
-    public String showLogin(Model model, HttpServletRequest request) {
+    public String showLogin(Model model, HttpServletRequest request, @PageableDefault(size = 6) Pageable pageable) {
+        List<ContentEntity> list = contentService.getAllContent();
+        //độ dài phần tử mỗi trang
+        int pageSize = pageable.getPageSize();
+        //số trang hiện tại
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<ContentEntity> pageContentList;
+        //kiem tra  list hiện tại có ít hơn trang bắt đầu{có có 10 phan tu}
+        if (list.size() < startItem) {
+            pageContentList = Collections.emptyList();
+        } else {
+            //truong hop list đủ phần tử
+            //tinh chỉ số cuối cùng của phần tử trên trang hiện tại k vượt quá kích thước của danh sách ban đầu
+            int toIndex = Math.min(startItem + pageSize, list.size());
+            //lay một phần của danh sách ban đầu từ startItem đến toIndex roi gan cho pageContentList
+            pageContentList = list.subList(startItem, toIndex);
+        }
+
+        Page<ContentEntity> pageContent = new PageImpl<>(pageContentList, pageable, list.size());
+
+        model.addAttribute("page", pageContent);
+        model.addAttribute("listContent1", pageContentList);
         request.getAttribute("success");
         model.addAttribute("login", new Login());
         model.addAttribute("listContent",contentService.getAllContent());

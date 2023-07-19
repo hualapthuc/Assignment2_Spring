@@ -5,6 +5,8 @@ import com.example.assignment2_spring.entity.MemberEntity;
 import com.example.assignment2_spring.repository.ContentRepository;
 import com.example.assignment2_spring.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +58,15 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<ContentEntity> findByMemberEntity(MemberEntity memberEntity) {
         return contentRepository.findContentEntitiesByMemberEntity(memberEntity);
+    }
+
+    @Override
+    public Page<ContentEntity> getContent(Pageable pageable) {
+        return contentRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<ContentEntity> getContentByMember(MemberEntity member, Pageable pageable) {
+        return contentRepository.findByMemberEntity(member,pageable);
     }
 }

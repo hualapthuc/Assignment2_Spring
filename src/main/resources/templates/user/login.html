@@ -124,7 +124,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="content:${listContent}">
+                        <tr th:each="content:${listContent1}">
                             <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
                             <td  style="word-break: break-word" th:utext="${content.title}"></td>
                             <td  style="word-break: break-word" th:utext="${content.brief}"></td>
@@ -133,6 +133,32 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="pagination">
+                                <ul>
+                                    <li style="display:inline;">
+                                        <span th:if="${page.first}">&lt;&lt;</span>
+                                        <a th:if="${!page.first}" th:href="@{/login(page=${page.number - 1})}">
+                                            &lt;&lt;
+                                        </a>
+                                    </li>
+                                    <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" style="display:inline;">
+                                        <span class="active" th:if="${i == page.number}" th:text="${i + 1}">1</span>
+                                        <a th:if="${i != page.number}" th:href="@{/login(page=${i})}">
+                                            <span th:text="${i + 1}">1</span>
+                                        </a>
+                                    </li>
+                                    <li style="display:inline;">
+                                        <span th:if="${page.last}">&gt;&gt;</span>
+                                        <a th:if="${!page.last}" th:href="@{/login(page=${page.number + 1})}">
+                                            &gt;&gt;
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

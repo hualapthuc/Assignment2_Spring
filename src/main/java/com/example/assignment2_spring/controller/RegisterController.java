@@ -34,13 +34,13 @@ public class RegisterController {
         MemberEntity isEmailAvailable = memberService.findByEmail(register.getEmail());
         MemberEntity isUsernameAvailable = memberService.findByUsername(register.getUsername());
         if(isEmailAvailable != null) {
-            br.rejectValue("email",null, "Your email already exists.");
+            br.rejectValue("email",null, "{email}");
         }
         if(isUsernameAvailable != null) {
-            br.rejectValue("username",null, "Your username already exists.");
+            br.rejectValue("username",null, "{username}");
         }
         if (!register.getPassword().equals(register.getRePassword())) {
-            br.rejectValue("rePassword", null, "Password & Confirm password don't match");
+            br.rejectValue("rePassword", null, "{rePassword}");
         }
 
         if (br.hasErrors()) {
