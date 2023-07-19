@@ -4,6 +4,7 @@
       lang="en" layout:decorate="~{layout/main}">
 <body>
 <div layout:fragment="content">
+    <h6 class="text-center mt-3" th:text="${#httpServletRequest.getAttribute('success')}"></h6>
     <h5 class="text-center mt-3">WELCOME, <span th:utext="${member.userName}" class="text-danger"></span></h5>
     <h1 class="m-3"> View Content</h1>
     <div class="card h-100 ml-3 w-100">
@@ -44,11 +45,14 @@
                         <td  style="word-break: break-word" th:utext="${content.title}"></td>
                         <td  style="word-break: break-word" th:utext="${content.brief}"></td>
                         <td  style="word-break: break-word" th:utext="${content.memberEntity.userName}"></td>
-                        <td   style="word-break: break-word" th:utext="${content.createDate}"></td>
-                        <td   style="word-break: break-word" th:utext="${content.updateDate}"></td>
+                        <td   style="word-break: break-word" th:text="${#dates.format(content.createdDate, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td   style="word-break: break-word" th:text="${#dates.format(content.updatedDate, 'dd/MM/yyyy HH:mm')}"></td>
                         <td  style="word-break: break-word" class="text-center">
+                            <a th:href="@{/login/content/view/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                                <i class="fas fa-info" style="color: blue"></i>
+                            </a>
                             <a th:href="@{/login/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
-                                <i class="fas fa-edit" style="color: blue"></i>
+                                <i class="fas fa-edit" style="color: grey"></i>
                             </a>
                             <a th:href="@{/login/content/delete/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" onclick="deleteContennt()">
                                 <i class="fas fa-trash-alt" style="color: red"></i>
@@ -57,6 +61,14 @@
                     </tr>
                     </tbody>
                 </table>
+<!--                <ul class="pagination">-->
+<!--                    <li th:unless="${currentPage == 0}" class="mr-2">-->
+<!--                        <a th:href="@{/login/view-content(page=${currentPage - 1})}">Previous</a>-->
+<!--                    </li>-->
+<!--                    <li th:unless="${#lists.isEmpty(contents)}">-->
+<!--                        <a th:href="@{/login/view-content(page=${currentPage + 1})}">Next</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@
             width: 380px;
         }
         body {
-            background-color: ghostwhite;
+            background-image: url("https://www.womenbuildingaustralia.com.au/sites/default/files/images/Poly_BG_Grad%20%281%29_0_1.png");
         }
     </style>
 </head>
@@ -31,13 +31,10 @@
                 <div class="card-body">
                     <form th:action="@{/register}" th:object="${register}" method="post">
                         <div class="form-group row">
-                            <div th:if="error != null" th:text="${error}" th:attr="class=${error != null ? 'w-100 m-3 text-danger text-center' : ''}">
-                                <div class="w-100 m-3 text-danger text-center"></div>
-                            </div>
                             <div class="w-100 mx-3">
                                 <input type="text" th:field="*{firstName}" id="firstName" class="form-control" name="firstName" placeholder="First Name">
                             </div>
-                            <div class="w-100 mx-3 text-warning"
+                            <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('firstName')}"
                                  th:errors="*{firstName}">
                             </div>
@@ -47,7 +44,7 @@
                             <div class="w-100 mx-3">
                                 <input type="text" th:field="*{lastName}" id="lastName" class="form-control" name="lastName" placeholder="Last Name">
                             </div>
-                            <div class="w-100 mx-3 text-warning"
+                            <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('lastName')}"
                                  th:errors="*{lastName}">
                             </div>
@@ -55,10 +52,9 @@
 
                         <div class="form-group row">
                             <div class="w-100 mx-3">
-                                <span id="msgg" class="hidden" style="color: red;display: block; margin-bottom: 10px"></span>
-                                <input type="text" th:field="*{phone}" id="phone" class="form-control" name="phone" placeholder="Phone" onkeyup="validatePhone()">
+                                <input type="text" th:field="*{phone}" id="phone" class="form-control" name="phone" placeholder="Phone">
                             </div>
-                            <div class="w-100 mx-3 text-warning"
+                            <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('phone')}"
                                  th:errors="*{phone}">
                             </div>
@@ -66,10 +62,9 @@
 
                         <div class="form-group row">
                             <div class="w-100 mx-3">
-                                <span id="message" class="hidden" style="color: red;display: block; margin-bottom: 10px"></span>
-                                <input type="email" th:field="*{email}" id="email" class="form-control" name="email" onkeyup="validateEmail()" placeholder="email@gmail.com">
+                                <input type="email" th:field="*{email}" id="email" class="form-control" name="email" placeholder="email@gmail.com">
                             </div>
-                            <div class="w-100 mx-3 text-warning"
+                            <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('email')}"
                                  th:errors="*{email}">
                             </div>
@@ -79,7 +74,7 @@
                             <div class="w-100 mx-3">
                                 <input type="text" th:field="*{username}" id="username" class="form-control" name="username" placeholder="Username">
                             </div>
-                            <div class="w-100 mx-3 text-warning"
+                            <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('username')}"
                                  th:errors="*{username}">
                             </div>
@@ -89,7 +84,7 @@
                             <div class="w-100 mx-3">
                                 <input type="password" th:field="*{password}" id="password" class="form-control" name="password"  placeholder="Password">
                             </div>
-                            <div class="w-100 mx-3 text-warning"
+                            <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('password')}"
                                  th:errors="*{password}">
                             </div>
@@ -97,8 +92,11 @@
 
                         <div class="form-group row">
                             <div class="w-100 mx-3">
-                                <span id="msg" class="" style="color: red;display: block; margin-bottom: 10px"></span>
-                                <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkPassword()">
+                                <input th:field="*{rePassword}" type="password" id="rePassword" class="form-control" name="rePassword" placeholder="Confirm Password">
+                            </div>
+                            <div class="w-100 mx-3 text-danger"
+                                 th:if="${#fields.hasErrors('rePassword')}"
+                                 th:errors="*{rePassword}">
                             </div>
                         </div>
 
@@ -116,37 +114,5 @@
         </div>
     </div>
 </div>
-<script>
-
-    function checkPassword(){
-        passsword = document.getElementById("password").value;
-        confirmPassword = document.getElementById("confirmPassword").value;
-        if(passsword!=confirmPassword){
-            document.getElementById("msg").innerHTML = " Password and Re-password don't match.";
-            return false;
-        }else{
-            document.getElementById("msg").innerHTML = "";
-            return true;
-        }
-    }
-    function validatePhone() {
-        phone = document.getElementById("phone").value;
-        if(isNaN(phone)) {
-            document.getElementById("msgg").innerHTML = " Phone number must be numbers.";
-            return false;
-        }else {
-            document.getElementById("msgg").innerHTML = "";
-            return true;
-        }
-    }
-    function validateEmail() {
-        var email = document.querySelector("#email").value;
-        if (email.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
-            document.getElementById("message").innerHTML = '';
-        } else {
-            document.getElementById("message").innerHTML =  ' Email is not a valid.';
-        }
-    }
-</script>
 </body>
 </html>

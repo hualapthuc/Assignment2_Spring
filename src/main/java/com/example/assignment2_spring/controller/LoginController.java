@@ -6,11 +6,14 @@ import com.example.assignment2_spring.model.Login;
 import com.example.assignment2_spring.service.ContentService;
 import com.example.assignment2_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,13 +30,14 @@ public class LoginController {
         return new MemberEntity();
     }
     @GetMapping("")
-    public String showLogin(Model model) {
+    public String showLogin(Model model, HttpServletRequest request) {
+        request.getAttribute("success");
         model.addAttribute("login", new Login());
         model.addAttribute("listContent",contentService.getAllContent());
         return "/user/login";
     }
     @PostMapping("")
-    public String doLogin(@Valid Login login, BindingResult br, Model model) {
+    public String doLogin(@Valid Login login, BindingResult br, Model model, HttpServletRequest request) {
         if(br.hasErrors()) {
             return "user/login";
         }
@@ -44,10 +48,12 @@ public class LoginController {
             return "user/login";
         }
         model.addAttribute("member", memberEntity);
+        request.setAttribute("success", "Login successfully!!");
         return "redirect:/login/view-content";
     }
     @GetMapping("/view-content")
-    public  String contentList(Model model, @ModelAttribute("member") MemberEntity member) {
+    public  String contentList(Model model) {
+        MemberEntity member = (MemberEntity) model.getAttribute("member");
         model.addAttribute("listContent",contentService.getAllContent());
         model.addAttribute("listContent1",contentService.getByUsername(member.getUserName()));
         model.getAttribute("member");
@@ -56,7 +62,6 @@ public class LoginController {
     @GetMapping("/form-content")
     public String createContent(Model model) {
         model.addAttribute("contents",new ContentEntity());
-        model.getAttribute("member");
         return "content/form-content";
     }
     @PostMapping("/save-content")
@@ -71,6 +76,13 @@ public class LoginController {
         model.getAttribute("member");
         return "content/edit-content";
     }
+    @GetMapping("/content/view/{id}")
+    public String showViewContent(@PathVariable("id") Integer id, Model model) {
+        ContentEntity content = contentService.getContentById(id);
+        model.addAttribute("contents", content);
+        model.getAttribute("member");
+        return "content/content";
+    }
     @PostMapping ("/update-content")
     public String updateContent(@ModelAttribute("contents") ContentEntity content) {
         contentService.editContent(content);
@@ -82,12 +94,13 @@ public class LoginController {
         return "redirect:/login/view-content";
     }
     @GetMapping("/search")
-    public String SearchContentEntity(@ModelAttribute("member") MemberEntity member, Model model, String keyword) {
+    public String SearchContentEntity(ContentEntity content, Model model, String keyword) {
         if(keyword!=null) {
-            List<ContentEntity> list = contentService.getByKeyword(keyword);
+            MemberEntity member = (MemberEntity) model.getAttribute("member");
+            List<ContentEntity> list = contentService.getByKeyword(keyword, member.getUserName());
             model.addAttribute("listContent1", list);
         }else {
-            List<ContentEntity> list = contentService.getByUsername(member.getUserName());
+            List<ContentEntity> list = contentService.getAllContent();
             model.addAttribute("listContent1", list);}
         return "content/view-content";
     }
@@ -116,5 +129,26 @@ public class LoginController {
         model.addAttribute("member1", memberService.getMemberById(member.getId()));
         return "member/view-profile";
     }
-
+//    @GetMapping("/view-content")
+//    public String getContents(@RequestParam(defaultValue = "0") int page, Model model) {
+//        MemberEntity member = (MemberEntity) model.getAttribute("member");
+//        if (member != null) {
+//            List<ContentEntity> contentList = member.getContentEntityList();
+//            model.addAttribute("listContent", contentList);
+//        }
+//        else {
+//            return "redirect:/register";
+//        }
+//        Page<ContentEntity> contentPage;
+//        if (member != null) {
+//            member = memberService.register(member);
+//            contentPage = contentService.findByMemberEntity(member, PageRequest.of(page, 5));
+//        } else {
+//            contentPage = contentService.getAllContent(PageRequest.of(page, 5));
+//        }
+//        model.addAttribute("contents", contentPage.getContent());
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("totalPages", contentPage.getTotalPages());
+//        return "content/view-content";
+//    }
 }

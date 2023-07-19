@@ -51,13 +51,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberEntity isUsernameExist(Register register) {
-        return memberRepository.findMemberEntityByUsername(register.getUsername());
+    public MemberEntity findByUsername(String username) {
+        return memberRepository.findMemberEntityByUserName(username);
     }
 
+    @Override
+    public MemberEntity findByEmail(String email) {
+        return memberRepository.findMemberEntityByEmail(email);
+    }
 
     @Override
     public MemberEntity login(Login login) {
         return memberRepository.findMemberEntityByUserNameAndPassword(login.getUsername(), login.getPassword());
     }
+
 }

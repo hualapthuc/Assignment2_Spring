@@ -14,5 +14,6 @@ public interface MemberService {
     void editMember(MemberEntity memberEntity);
     MemberEntity getMemberById(int id);
     MemberEntity updatePassword(String password, int id);
-    MemberEntity isUsernameExist(Register register);
+    MemberEntity findByUsername(String username);
+    MemberEntity findByEmail(String email);
 }

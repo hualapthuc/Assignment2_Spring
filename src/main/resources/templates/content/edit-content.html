@@ -27,8 +27,9 @@
                 <textarea type="text" th:field="*{content}" th:value="${contents.content}" class="form-control" rows="7"></textarea>
             </div>
             <div class="form-group">
-                <a th:href="@{/login/view-content}" class="btn btn-light  mt-3" tabindex="-1" role="button" aria-disabled="true">Cancel</a>
-                <button type="submit" value="Save" class="btn btn-success mt-3">Save</button>
+<!--                <a th:href="@{/login/view-content}" class="btn btn-light  mt-3 justify-content-right" tabindex="-1" role="button" aria-disabled="true">Cancel</a>-->
+                <button type="submit" class="btn btn-success mt-3">Save</button>
+                <button type="reset" class="btn btn-light mt-3">Reset</button>
             </div>
         </form>
     </div>

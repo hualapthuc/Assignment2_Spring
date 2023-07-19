@@ -1,8 +1,12 @@
 package com.example.assignment2_spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 @Entity
 @Table(name = "content")
@@ -17,12 +21,14 @@ public class ContentEntity {
     private String brief;
     @Column(name = "content", nullable = false, length = 200)
     private String content;
-    @Column(name = "createdDate", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-    @Column(name = "updatedDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateDate;
+
+    @CreationTimestamp
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "updated_date", nullable = false)
+    private Timestamp updatedDate;
 
     private String sort;
     @ManyToOne

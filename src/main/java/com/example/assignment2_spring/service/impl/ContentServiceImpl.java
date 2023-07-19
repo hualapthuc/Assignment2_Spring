@@ -1,6 +1,7 @@
 package com.example.assignment2_spring.service.impl;
 
 import com.example.assignment2_spring.entity.ContentEntity;
+import com.example.assignment2_spring.entity.MemberEntity;
 import com.example.assignment2_spring.repository.ContentRepository;
 import com.example.assignment2_spring.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,16 @@ public class ContentServiceImpl implements ContentService {
         return contentRepository.findByTitle(title);
     }
     @Override
-    public List<ContentEntity> getByKeyword(String keyword) {
-        return contentRepository.findByKeyword(keyword);
+    public List<ContentEntity> getByKeyword(String keyword, String username) {
+        return contentRepository.findByKeyword(keyword, username);
     }
 
     @Override
     public List<ContentEntity> getByUsername(String username) {
         return contentRepository.findByMemberUsername(username);
+    }
+    @Override
+    public List<ContentEntity> findByMemberEntity(MemberEntity memberEntity) {
+        return contentRepository.findContentEntitiesByMemberEntity(memberEntity);
     }
 }
