@@ -9,51 +9,51 @@
         <div class="card-header">
             Profile Form Elements
         </div>
-        <form th:object="${member}">
+        <form th:object="${member1}">
             <div class="card-body" id="form-content">
                 <div class="row mt-0">
                     <div class="col-xl-10">
                         <div class="form-group was-validated">
                             <label style="font-weight: bolder;">First name</label>
-                            <input type="text" th:value="${member.firstName}" class="form-control" id="firstname" name="firstName" readonly>
+                            <input type="text" th:value="${member1.firstName}" class="form-control" id="firstname" name="firstName" readonly>
                         </div>
                     </div>
 
                     <div class="col-xl-10">
                         <div class="form-group was-validated">
                             <label style="font-weight: bolder;">Last name</label>
-                            <input type="text" th:value="${member.lastName}" class="form-control" id="lastname" name="lastName" readonly>
+                            <input type="text" th:value="${member1.lastName}" class="form-control" id="lastname" name="lastName" readonly>
                         </div>
                     </div>
                     <div class="col-xl-10">
                         <div class="form-group was-validated">
                             <label style="font-weight: bolder;">E-mail</label>
-                            <input type="email" th:value="${member.email}" class="form-control" id="email" name="email" readonly>
+                            <input type="email" th:value="${member1.email}" class="form-control" id="email" name="email" readonly>
                         </div>
                     </div>
                     <div class="col-xl-10">
                         <div class="form-group was-validated">
                             <label style="font-weight: bolder;">Phone</label>
-                            <input type="text" th:value="${member.phone}" class="form-control" id="phone" name="phone" readonly>
+                            <input type="text" th:value="${member1.phone}" class="form-control" id="phone" name="phone" readonly>
                         </div>
                     </div>
                     <div class="col-xl-10">
                         <div class="form-group">
                             <label style="font-weight: bolder;">Description</label>
-                            <input th:value="${member.description}" class="form-control" id="description" required rows="5" readonly></input>
+                            <textarea type="text" th:field="*{description}" th:value="${member1.description}" class="form-control" id="description" rows="5" readonly></textarea>
                         </div>
                     </div>
 
-                    <div class="col-5">
-                        <div class="text-left">
-                            <!--                            <a th:href="@{/login/member/edit-profile}">-->
-                            <!--                                <button type="submit" class="btn btn-primary">Edit Profile</button>-->
-                            <!--                            </a>-->
-                            <!--                            <a th:href="@{/login/member/change-password}">-->
-                            <!--                                <button type="submit" class="btn btn-warning">Change Password</button>-->
-                            <!--                            </a>-->
-                        </div>
-                    </div>
+                    <!--                    <div class="col-5">-->
+                    <!--                        <div class="text-left">-->
+                    <!--                            <a th:href="@{/login/content/view-content}">-->
+                    <!--                                <button type="submit" class="btn btn-primary">Edit Profile</button>-->
+                    <!--                            </a>-->
+                    <!--                            <a th:href="@{/login/member/change-password}">-->
+                    <!--                                <button type="submit" class="btn btn-warning">Change Password</button>-->
+                    <!--                            </a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </form>

@@ -2,32 +2,35 @@ package com.example.assignment2_spring.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 @Entity
 @Table(name = "content")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class ContentEntity{
+public class ContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     @Column(name = "title", nullable = false, length = 200)
     private String title;
     @Column(name = "brief", nullable = false, length = 200)
     private String brief;
-    @Column(name = "content", nullable = false, length = 5000)
+    @Column(name = "content", nullable = false, length = 200)
     private String content;
+    @CreationTimestamp
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private Timestamp createdDate;
 
-    @Column(name = "createdDate", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date createDate;
-
-    @Column(name = "updatedDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private Date updateDate;
+    @UpdateTimestamp
+    @Column(name = "updated_date", nullable = false)
+    private Timestamp updatedDate;
 
     @ManyToOne
     @JoinColumn(name = "authorId")
     private MemberEntity memberEntity;
 }
+

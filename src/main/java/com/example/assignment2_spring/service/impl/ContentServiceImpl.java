@@ -18,6 +18,7 @@ import java.util.List;
 public class ContentServiceImpl implements ContentService {
     @Autowired
     private ContentRepository contentRepository;
+
     @Override
     public List<ContentEntity> getAllContent() {
         return contentRepository.findAll();
@@ -25,17 +26,17 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public void createContent(ContentEntity content) {
-       contentRepository.save(content);
+        contentRepository.save(content);
     }
 
     @Override
-    public void deleteContent(Integer id) {
+    public void deleteContent(int id) {
         contentRepository.deleteById(id);
     }
 
     @Override
     public void editContent(ContentEntity content) {
-          contentRepository.save(content);
+        contentRepository.save(content);
     }
 
     @Override
@@ -43,47 +44,32 @@ public class ContentServiceImpl implements ContentService {
         return contentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("content not found"));
     }
+
     @Override
-    public List<ContentEntity> getByKeyword(String keyword) {
-        return contentRepository.findByKeyword(keyword);
+    public List<ContentEntity> getByTitle(String title) {
+        return contentRepository.findByTitle(title);
+    }
+    @Override
+    public List<ContentEntity> getByKeyword(String keyword, String username) {
+        return contentRepository.findByKeyword(keyword, username);
     }
 
     @Override
-    public Page<ContentEntity> getAllContents(Pageable pageable) {
-        return contentRepository.findAll(pageable);
+    public List<ContentEntity> getByUsername(String username) {
+        return contentRepository.findByMemberUsername(username);
     }
-
-    @Override
-    public Page<ContentEntity> findByMemberEntity(MemberEntity memberEntity, Pageable pageable) {
-        return contentRepository.findByMemberEntity(memberEntity, pageable);
-    }
-
-    @Override
-    public Page<ContentEntity> getPaginatedContents(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createDate").descending());
-        return contentRepository.findAll(pageable);
-    }
-
-    @Override
-    public List<ContentEntity> getMemberContentPaged(int memberId, int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("createDate").descending());
-        Page<ContentEntity> contentPage = contentRepository.findByMemberId(memberId, pageable);
-
-        return contentPage.getContent();
-    }
-
-    @Override
-    public int getTotalPagesForMemberContent(int memberId, int pageSize) {
-        Pageable pageable = PageRequest.of(0, pageSize);
-        Page<ContentEntity> contentPage = contentRepository.findByMemberId(memberId, pageable);
-
-        return contentPage.getTotalPages();
-    }
-
     @Override
     public List<ContentEntity> findByMemberEntity(MemberEntity memberEntity) {
-        return contentRepository.findByMemberEntity(memberEntity);
+        return contentRepository.findContentEntitiesByMemberEntity(memberEntity);
     }
 
+    @Override
+    public Page<ContentEntity> getContent(Pageable pageable) {
+        return contentRepository.findAll(pageable);
+    }
 
+    @Override
+    public Page<ContentEntity> getContentByMember(MemberEntity member, Pageable pageable) {
+        return contentRepository.findByMemberEntity(member,pageable);
+    }
 }

@@ -16,20 +16,18 @@
       </div>
       <div class="form-group">
         <label>Title:</label>
-        <input type="text" th:field="*{title}" th:value="${contents.title}" class="form-control">
+        <input type="text" th:field="*{title}" th:value="${contents.title}" class="form-control" readonly>
       </div>
       <div class="form-group">
         <label>Brief:</label>
-        <textarea type="text" th:field="*{brief}" th:value="${contents.brief}" class="form-control"></textarea>
+        <textarea type="text" th:field="*{brief}" th:value="${contents.brief}" class="form-control" readonly></textarea>
       </div>
       <div class="form-group">
         <label>Content:</label>
-        <textarea type="text" th:field="*{content}" th:value="${contents.content}" class="form-control" rows="7"></textarea>
+        <textarea type="text" th:field="*{content}" th:value="${contents.content}" class="form-control" rows="7" readonly></textarea>
       </div>
       <div class="form-group">
-        <!--                <a th:href="@{/login/view-content}" class="btn btn-light  mt-3 justify-content-right" tabindex="-1" role="button" aria-disabled="true">Cancel</a>-->
-        <button type="submit" class="btn btn-success mt-3">Save</button>
-        <button type="reset" class="btn btn-light mt-3">Reset</button>
+        <a th:href="@{/login/view-content}" class="btn btn-primary  mt-3" tabindex="-1" role="button" aria-disabled="true"><i class="fas fa-backward"></i> Back</a>
       </div>
     </form>
   </div>

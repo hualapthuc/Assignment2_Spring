@@ -12,19 +12,14 @@ import java.util.Optional;
 public interface ContentService {
      List<ContentEntity> getAllContent();
      void createContent(ContentEntity content);
-     void deleteContent(Integer id);
+     void deleteContent(int id);
      void editContent(ContentEntity content);
      ContentEntity getContentById(int id);
-     List<ContentEntity> getByKeyword(String keyword);
-
-     Page<ContentEntity> getAllContents(Pageable pageable);
-     Page<ContentEntity> findByMemberEntity(MemberEntity memberEntity, Pageable pageable);
-
-     Page<ContentEntity> getPaginatedContents(int page, int size);
-
-     List<ContentEntity> getMemberContentPaged(int memberId, int page, int pageSize);
-     public int getTotalPagesForMemberContent(int memberId, int pageSize);
+     List<ContentEntity> getByTitle(String title);
+     List<ContentEntity> getByKeyword(String keyword, String username);
+     List<ContentEntity> getByUsername(String username);
      List<ContentEntity> findByMemberEntity(MemberEntity memberEntity);
 
-
+     Page<ContentEntity> getContent(Pageable pageable);
+     Page<ContentEntity> getContentByMember(MemberEntity member, Pageable pageable);
 }
