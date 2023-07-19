@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"  layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <h5 class="text-center mt-3">WELCOME, <span th:utext="${member.userName}" class="text-danger"></span></h5>
+        <form th:action="@{/login/update-content}" method="post" th:object="${contents}" class="form">
+            <select th:field="*{memberEntity.id}" style="display: none">
+                <option th:value="${member.id}" th:text="${member.userName}"></option>
+            </select>
+            <div class="form-group">
+                <label>Content ID:</label>
+                <input type="text" th:field="*{id}" class="form-control" th:value="${contents.id}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" th:field="*{title}" th:value="${contents.title}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Brief:</label>
+                <textarea type="text" th:field="*{brief}" th:value="${contents.brief}" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Content:</label>
+                <textarea type="text" th:field="*{content}" th:value="${contents.content}" class="form-control" rows="7"></textarea>
+            </div>
+            <div class="form-group">
+<!--                <a th:href="@{/login/view-content}" class="btn btn-light  mt-3 justify-content-right" tabindex="-1" role="button" aria-disabled="true">Cancel</a>-->
+                <button type="submit" class="btn btn-success mt-3">Save</button>
+                <button type="reset" class="btn btn-light mt-3">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

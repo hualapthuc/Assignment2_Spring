@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en" layout:decorate="~{layout/main}">
 <body>
+<div layout:fragment="content">
+    <h6 class="text-center mt-3" th:text="${#httpServletRequest.getAttribute('success')}"></h6>
+    <h5 class="text-center mt-3">WELCOME, <span th:utext="${member.userName}" class="text-danger"></span></h5>
+    <h1 class="m-3"> View Content</h1>
+    <div class="card h-100 ml-3 w-100">
+        <div class="card-header container-fluid d-flex" style="padding: 12px 12px 0 12px">
+            <div class="mr-auto p-2">
+                View Content List
+            </div>
+            <div class="ml-auto p-2">
+                <form th:action="@{/login/search}" class="mb-2 form-inline" method="get">
+                    <div class="input-group">
+                        <input type="text" name="keyword" th:value="${keyword}" class="form-control  rounded btn-sm"  placeholder="Search by Title" size="40">
+                    </div>
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-info btn-sm ml-1">Search</button>
+                        <button type="reset" class="btn btn-warning btn-sm ml-1">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <div class="card-body container">
+            <div class="row mt-0">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="" style="font-size: 14px;color: black">
+                        <th class="col-1 text-center">#</th>
+                        <th class="col-2">Title</th>
+                        <th class="col-2">Brief</th>
+                        <th class="col-2">Author</th>
+                        <th class="col-1.5">Create Date</th>
+                        <th class="col-1.5">Update Date</th>
+                        <th class="col-2 text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="content:${listContent1}">
+                        <td style="word-break: break-word;text-align: center" th:utext="${content.id}"></td>
+                        <td  style="word-break: break-word" th:utext="${content.title}"></td>
+                        <td  style="word-break: break-word" th:utext="${content.brief}"></td>
+                        <td  style="word-break: break-word" th:utext="${content.memberEntity.userName}"></td>
+                        <td   style="word-break: break-word" th:text="${#dates.format(content.createdDate, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td   style="word-break: break-word" th:text="${#dates.format(content.updatedDate, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td  style="word-break: break-word" class="text-center">
+                            <a th:href="@{/login/content/view/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                                <i class="fas fa-info" style="color: blue"></i>
+                            </a>
+                            <a th:href="@{/login/content/edit/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" >
+                                <i class="fas fa-edit" style="color: grey"></i>
+                            </a>
+                            <a th:href="@{/login/content/delete/{id}(id=${content.id})}" class="btn" tabindex="-1" role="button" aria-disabled="true" onclick="deleteContennt()">
+                                <i class="fas fa-trash-alt" style="color: red"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+<!--                <ul class="pagination">-->
+<!--                    <li th:unless="${currentPage == 0}" class="mr-2">-->
+<!--                        <a th:href="@{/login/view-content(page=${currentPage - 1})}">Previous</a>-->
+<!--                    </li>-->
+<!--                    <li th:unless="${#lists.isEmpty(contents)}">-->
+<!--                        <a th:href="@{/login/view-content(page=${currentPage + 1})}">Next</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
