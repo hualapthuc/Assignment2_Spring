@@ -14,15 +14,20 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberRepository memberRepository;
-
-    @Override
     public List<MemberEntity> getAll() {
         return memberRepository.findAll();
     }
 
     @Override
-    public void register(MemberEntity memberEntity) {
-        memberRepository.save(memberEntity);
+    public void register(Register register) {
+        MemberEntity member = new MemberEntity();
+        member.setFirstName(register.getFirstName());
+        member.setLastName(register.getLastName());
+        member.setUserName(register.getUsername());
+        member.setEmail(register.getEmail());
+        member.setPhone(register.getPhone());
+        member.setPassword(register.getPassword());
+        memberRepository.save(member);
     }
 
     @Override
@@ -41,7 +46,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberEntity login(Login login) {
-        return memberRepository.findMemberEntitiesByUserNameAndPassword(login.getUsername(), login.getPassword());
+    public MemberEntity updatePassword(String password, int id) {
+        return memberRepository.updateMemberEntityByPasswordAfter(password, id);
     }
+
+    @Override
+    public MemberEntity findByUsername(String username) {
+        return memberRepository.findMemberEntityByUserName(username);
+    }
+
+    @Override
+    public MemberEntity findByEmail(String email) {
+        return memberRepository.findMemberEntityByEmail(email);
+    }
+
+    @Override
+    public MemberEntity login(Login login) {
+        return memberRepository.findMemberEntityByUserNameAndPassword(login.getUsername(), login.getPassword());
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.assignment2_spring.service;
 
 import com.example.assignment2_spring.entity.ContentEntity;
+import com.example.assignment2_spring.entity.MemberEntity;
 
 import java.util.List;
 
@@ -11,4 +12,7 @@ public interface ContentService {
     void editContent(ContentEntity content);
     ContentEntity getContentById(int id);
     List<ContentEntity> getByTitle(String title);
+    List<ContentEntity> getByKeyword(String keyword, String username);
+    List<ContentEntity> getByUsername(String username);
+    List<ContentEntity> findByMemberEntity(MemberEntity memberEntity);
 }

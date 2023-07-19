@@ -4,15 +4,19 @@
       lang="en" layout:decorate="~{layout/main}">
 <body>
 <div layout:fragment="content">
-    <div class="row col-sm-10 mt-3">
-        <h1 class="ml-3 mb-3"> Add Content</h1>
+        <h5 class="text-center mt-3">WELCOME, <span th:utext="${member.userName}" class="text-danger"></span></h5>
+        <h1 class="m-3"> Add Content</h1>
         <div class="card h-100 ml-3 w-100">
             <div class="card-header">
                 Content Form Elements
             </div>
-            <form th:action="@{/content/save-content}" method="post" th:object="${contents}" class="form">
+            <form th:action="@{/login/save-content}" method="post" th:object="${contents}" class="form">
                 <div class="card-body">
                     <div class="row mt-0">
+                        <select th:field="*{memberEntity.id}" style="display: none">
+                            <option th:value="${member.id}" th:text="${member.userName}"></option>
+                        </select>
+<!--                        <input name="id" type="number" th:value="${member.id}" style="display: none">-->
                         <div class="col-xl-10">
                             <div class="form-group was-validated">
                                 <label style="font-weight: bolder;">Title</label>
@@ -43,7 +47,6 @@
                 </div>
             </form>
         </div>
-    </div>
 </div>
 </body>
 </html>

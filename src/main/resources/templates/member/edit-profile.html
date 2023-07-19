@@ -4,52 +4,59 @@
       lang="en" layout:decorate="~{layout/main}">
 <body>
 <div layout:fragment="content">
-    <h1 class="ml-3 mb-3"> Edit Profile</h1>
+    <h1 class="m-3"> Edit Profile</h1>
     <div class="card h-100 ml-3">
         <div class="card-header">
             Profile Form Elements
         </div>
-        <form action="" method="post">
+        <form th:action="@{/login/member/save}" th:object="${member1}" method="post">
             <div class="card-body" id="form-content">
                 <div class="row mt-0">
                     <div class="col-xl-10">
-                        <div class="form-group was-validated">
-                            <label style="font-weight: bolder;">First name</label>
-                            <input type="text" class="form-control" id="firstname" name="firstName" value="<%=first_name%>" >
+                        <div class="form-group" style="display: none">
+                            <input type="text" th:field="*{id}" th:value="${member1.id}">
+                            <input type="text" th:field="*{userName}" th:value="${member1.userName}">
+                            <input type="text" th:field="*{password}" th:value="${member1.password}">
                         </div>
                     </div>
+                        <div class="col-xl-10">
+                            <div class="form-group was-validated">
+                                <label style="font-weight: bolder;">First name</label>
+                                <input type="text" th:field="*{firstName}" th:value="${member1.firstName}" class="form-control" id="firstname" name="firstName">
+                            </div>
+                        </div>
 
-                    <div class="col-xl-10">
-                        <div class="form-group was-validated">
-                            <label style="font-weight: bolder;">Last name</label>
-                            <input type="text" class="form-control" id="lastname" name="lastName" value="<%=last_name%>" >
+                        <div class="col-xl-10">
+                            <div class="form-group was-validated">
+                                <label style="font-weight: bolder;">Last name</label>
+                                <input type="text" th:field="*{lastName}" th:value="${member1.lastName}" class="form-control" id="lastname" name="lastName">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xl-10">
-                        <div class="form-group was-validated">
-                            <label style="font-weight: bolder;">E-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<%=email%>" readonly>
+                        <div class="col-xl-10">
+                            <div class="form-group was-validated">
+                                <label style="font-weight: bolder;">E-mail</label>
+                                <input type="email" th:field="*{email}" th:value="${member1.email}" class="form-control" id="email" name="email" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xl-10">
-                        <div class="form-group was-validated">
-                            <label style="font-weight: bolder;">Phone</label>
-                            <input type="number" class="form-control" id="phone" name="phone" value="<%=phone%>">
+                        <div class="col-xl-10">
+                            <div class="form-group was-validated">
+                                <label style="font-weight: bolder;">Phone</label>
+                                <input type="text" th:field="*{phone}" th:value="${member1.phone}" class="form-control" id="phone" name="phone">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xl-10">
-                        <div class="form-group">
-                            <label style="font-weight: bolder;">Description</label>
-                            <textarea type="text" class="form-control" id="description" required rows="5"></textarea>
+                        <div class="col-xl-10">
+                            <div class="form-group">
+                                <label style="font-weight: bolder;">Description</label>
+                                <textarea type="text" th:field="*{description}" th:value="${member1.description}" class="form-control" id="description" required rows="5"></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-3">
-                        <div class="text-left">
-                            <button type="submit" id="submit" name="submit" class="btn btn-light border">Submit Button</button>
-                            <button type="submit" id="reset" name="reset" class="btn btn-light border">Reset Button</button>
+                        <div class="col-5">
+                            <div class="text-left">
+                                <button onclick="alert('Edit Successfully!')" type="submit" id="submit" name="submit" class="btn btn-success border">Submit Button</button>
+                                <button type="reset" id="reset" name="reset" class="btn btn-light border">Reset Button</button>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </form>
