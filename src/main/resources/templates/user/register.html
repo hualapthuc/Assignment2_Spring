@@ -28,7 +28,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header row mt-1">
-                    <b class="text-left col-8" th:text="#{register}"></b>
+                    <b class="text-left col-7" th:text="#{register}"></b>
                     <div class="col-3 text-right">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <button class="btn btn-outline-primary" name="options" id="option1">
@@ -39,6 +39,11 @@
                             <button class="btn btn-outline-primary" name="options" id="option2">
                                 <a href="/register?lang=vi">
                                     VI
+                                </a>
+                            </button>
+                            <button class="btn btn-outline-primary" name="options" id="option3">
+                                <a href="/register?lang=ja">
+                                    JA
                                 </a>
                             </button>
                         </div>
@@ -79,7 +84,7 @@
 
                         <div class="form-group row">
                             <div class="w-100 mx-3">
-                                <input type="email" th:field="*{email}" id="email" class="form-control" name="email" placeholder="Email">
+                                <input type="email" th:field="*{email}" id="email" class="form-control" name="email" th:placeholder="#{email.placeholder}">
                             </div>
                             <div class="w-100 mx-3 text-danger"
                                  th:if="${#fields.hasErrors('email')}"

@@ -10,6 +10,6 @@ public class HandlingException {
     public String handleError(Model model, Exception ex) {
         model.addAttribute("url", "");
         model.addAttribute("exception", ex);
-        return "error";
+        return "error/401";
     }
 }

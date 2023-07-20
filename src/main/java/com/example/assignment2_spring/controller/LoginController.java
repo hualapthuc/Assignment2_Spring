@@ -57,24 +57,33 @@ public class LoginController {
 
         model.addAttribute("page", pageContent);
         model.addAttribute("listContent1", pageContentList);
-        request.getAttribute("success");
         model.addAttribute("login", new Login());
         model.addAttribute("listContent",contentService.getAllContent());
         return "/user/login";
     }
     @PostMapping("")
-    public String doLogin(@Valid Login login, BindingResult br, Model model, HttpServletRequest request) {
+    public String doLogin(@Valid Login login,
+                          BindingResult br,
+                          Model model,
+                          @PageableDefault(size = 6) Pageable pageable) {
         if(br.hasErrors()) {
+            List<ContentEntity> pageContentList = Collections.emptyList();
+            List<ContentEntity> list1 = contentService.getAllContent();
+            Page<ContentEntity> pageContent = new PageImpl<>(pageContentList, pageable, list1.size());
+            model.addAttribute("page", pageContent);
             return "user/login";
         }
 
         MemberEntity memberEntity = memberService.login(login);
         if(memberEntity == null) {
+            List<ContentEntity> pageContentList = Collections.emptyList();
+            List<ContentEntity> list1 = contentService.getAllContent();
+            Page<ContentEntity> pageContent = new PageImpl<>(pageContentList, pageable, list1.size());
+            model.addAttribute("page", pageContent);
             model.addAttribute("error", "Incorrect Username or Password");
             return "user/login";
         }
         model.addAttribute("member", memberEntity);
-        request.setAttribute("success", "Login successfully!!");
         return "redirect:/login/view-content";
     }
     @GetMapping("/view-content")
@@ -155,26 +164,4 @@ public class LoginController {
         model.addAttribute("member1", memberService.getMemberById(member.getId()));
         return "member/view-profile";
     }
-//    @GetMapping("/view-content")
-//    public String getContents(@RequestParam(defaultValue = "0") int page, Model model) {
-//        MemberEntity member = (MemberEntity) model.getAttribute("member");
-//        if (member != null) {
-//            List<ContentEntity> contentList = member.getContentEntityList();
-//            model.addAttribute("listContent", contentList);
-//        }
-//        else {
-//            return "redirect:/register";
-//        }
-//        Page<ContentEntity> contentPage;
-//        if (member != null) {
-//            member = memberService.register(member);
-//            contentPage = contentService.findByMemberEntity(member, PageRequest.of(page, 5));
-//        } else {
-//            contentPage = contentService.getAllContent(PageRequest.of(page, 5));
-//        }
-//        model.addAttribute("contents", contentPage.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", contentPage.getTotalPages());
-//        return "content/view-content";
-//    }
 }
